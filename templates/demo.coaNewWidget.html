@@ -1,0 +1,38 @@
+<div class="coa">
+	<form name="${formName}">
+		<div class="chartFields">
+			<div id="messages">
+				{{if messages && messages.length > 0}}
+					<ul class="messages">
+						{{each messages}}
+						<li>${$value}</li>
+						{{/each}}
+					</ul>
+				{{/if}}
+			</div>
+			<div id="errors">
+				{{if errors && errors.length > 0}}
+					<ul class="errors">
+						{{each errors}}
+						<li>${$value}</li>
+						{{/each}}
+					</ul>
+				{{/if}}
+			</div>
+			<label for="speedtype" class="sameLine required">SpeedType</label>
+            <input type="text" class="required coaRemote" name="speedtype" value="${coa.speedtype}"/>
+            <lookups:lookup title="SpeedType Lookup" group="speedTypes" populate="${formName}.speedtype:code;">(lookup)</lookups:lookup><br/>
+			<label for="speedtype" class="sameLine required">Setid</label>
+            <input type="text" class="required" name="setid" value="${coa.setid}"/>
+		</div>
+		<div class="coaHeader">
+			<h3>Chart of Accounts ${coa.id}</h3>
+		</div>
+		<div class="coaFooter">
+			<button class="coaButton stateWidgetAction" type="button" action="next">Next</button>
+			{{if coa.speedtype}}
+			<button class="coaButton stateWidgetAction" type="button" action="cancel">Cancel Change Speedtype</button>
+			{{/if}}
+		</div>
+	</form>
+</div>
