@@ -1,0 +1,217 @@
+<div id="templates" style="display:none;">
+    <div id="loading.html">
+        <div id="whatever">loading...</div>
+    </div>
+    <div id="error.html">
+        <div id="whatever">There was a grevious error</div>
+    </div>
+    <div id="saving.html">
+        <div id="blah">Saving...</div>
+    </div>
+    <div id="new.html">
+        <div class="coa">
+            <form name="${formName}">
+                <div class="chartFields">
+                    <div id="messages">
+                        {{if messages && messages.length > 0}}
+                        <ul class="messages">
+                            {{each messages}}
+                            <li>${$value}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    <div id="errors">
+                        {{if errors && errors.length > 0}}
+                        <ul class="errors">
+                            {{each errors}}
+                            <li>${$value}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    <label for="speedtype" class="sameLine required">SpeedType</label>
+                    <input type="text" class="required coaRemote" name="speedtype" value="${coa.speedtype}"/>
+                    <lookups:lookup title="SpeedType Lookup" group="speedTypes" populate="${formName}.speedtype:code;">(lookup)</lookups:lookup><br/>
+                    <label for="speedtype" class="sameLine required">Setid</label>
+                    <input type="text" class="required" name="setid" value="${coa.setid}"/>
+                </div>
+                <div class="coaHeader">
+                    <h3>Chart of Accounts ${coa.id}</h3>
+                </div>
+                <div class="coaFooter">
+                    <button class="coaButton stateWidgetAction" type="button" action="next">Next</button>
+                    {{if coa.speedtype}}
+                    <button class="coaButton stateWidgetAction" type="button" action="cancel">Cancel Change Speedtype</button>
+                    {{/if}}
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="edit.html">
+        <div class="coa">
+            <form name="${formName}">
+                <div class="chartFields">
+                    <div id="messages">
+                        {{if messages && messages.length > 0}}
+                        <ul class="messages">
+                            {{each messages}}
+                            <li>${$value}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    <div id="errors">
+                        {{if errors && errors.length > 0}}
+                        <ul class="errors">
+                            {{each errors}}
+                            <li>${$value}</li>
+                            {{/each}}
+                        </ul>
+                        {{/if}}
+                    </div>
+                    <label for="speedtype" class="sameLine">SpeedType</label><span id="speedtype">${coa.speedtype}</span><br/>
+                    {{if coaView.purposeEditable}}
+                    <label for="purpose" class="sameLine required">Purpose</label><input type="text" name="purpose" class="required" value="${coa.purpose}"/><br/>
+                    {{else}}
+                    <label for="purpose" class="sameLine">Purpose</label><span id="purpose">${coaView.purposeDescr} (${coa.purpose})</span><br/>        
+                    {{/if}}
+                    {{if coaView.deptIdEditable}}
+                    <label for="deptId" class="sameLine required">Dept Id</label><input type="text" name="deptId" class="required" value="${coa.deptId}"/><br/>
+                    {{else}}
+                    <label for="deptIdDescr" class="sameLine">Department</label><span id="deptIdDescr">${coaView.deptIdDescr}</span><br/>
+                    {{/if}}
+                    {{if coaView.fundEditable}}        
+                    <label for="fund" class="sameLine">Fund</label><input type="text" name="fund" value="${coa.fund}"/><br/>
+                    {{else}}
+                    <label for="fund" class="sameLine">Fund</label><span id="fund">${coa.fund}</span><br/>
+                    {{/if}}
+                    {{if coaView.programEditable}}        
+                    <label for="program" class="sameLine">Program</label><input type="text" name="program" value="${coa.program}"/><br/>
+                    {{else}}
+                    <label for="program" class="sameLine">Program</label><span id="program">${coa.program}</span><br/>
+                    {{/if}}
+                    {{if coaView.accountEditable}}    
+                    <label for="account" class="sameLine required">Account</label><input type="text" name="account" class="required" value="${coa.account}"/>
+                    <lookups:lookup title="Account Lookup" group="accounts" populate="account:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="account" class="sameLine">Account</label><span id="account">${coa.account}</span><br/>
+                    {{/if}}
+                    {{if coaView.classFieldEditable}}    
+                    <label for="classField" class="sameLine">Class</label><input type="text" name="classField" value="${coa.classField}"/>
+                    <lookups:lookup title="Class Lookup" group="classfields" populate="classField:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="classField" class="sameLine">Class</label><span id="classField">${coa.classField}</span><br/>
+                    {{/if}}
+                    {{if coaView.anyFieldEditable}}
+                    <label for="userField" class="sameLine">UserField</label><input type="text" name="userField" value="${coa.userField}"/><br/>
+                    {{else}}
+                    <label for="userField" class="sameLine">UserField</label><span id="userField">${coa.userField}</span><br/>
+                    {{/if}}
+                    {{if coaView.projectIdEditable}}
+                    <label for="projectId" class="sameLine">Project ID/grant</label><input type="text" name="projectId" value="${coa.projectId}"/>
+                    <lookups:lookup title="Project ID/grant Lookup" group="projects" populate="projectId:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="projectId" class="sameLine">Project ID/grant</label><span id="projectId">${coa.projectId}</span><br/>
+                    {{/if}}
+                    {{if coaView.sourceEditable}}
+                    <label for="source" class="sameLine">Source</label><input type="text" name="source" value="${coa.source}"/>
+                    <lookups:lookup title="Source Lookup" group="sources" populate="source:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="source" class="sameLine">Source</label><span id="source">${coa.source}</span><br/>
+                    {{/if}}
+                    {{if coaView.anyFieldEditable}}
+                    <label for="resourceType" class="sameLine">Resource type</label><input type="text" name="resourceType" value="${coa.resourceType}"/>
+                    <lookups:lookup title="Resource type Lookup" group="resourceTypes" populate="resourceType:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="resourceType" class="sameLine">Resource type</label><span id="resourceType">${coa.resourceType}</span><br/>
+                    {{/if}}
+                    {{if coaView.anyFieldEditable}}
+                    <label for="resourceCategory" class="sameLine">Resource category</label><input type="text" name="resourceCategory" value="${coa.resourceCategory}"/>
+                    <lookups:lookup title="Resource type Lookup" group="resourceCategories" populate="resourceCategory:{code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="resourceCategory" class="sameLine">Resource category</label><span id="resourceCategory">${coa.resourceCategory}</span><br/>
+                    {{/if}}
+                    {{if coaView.anyFieldEditable}}
+                    <label for="resourceSubcategory" class="sameLine">Resource subcategory</label><input type="text" name="resourceSubcategory" value="${coa.resourceSubcategory}"/>
+                    <lookups:lookup title="Resource type Lookup" group="resourceSubcategories" populate="resourceSubcategory:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="resourceSubcategory" class="sameLine">Resource subcategory</label><span id="resourceSubcategory">${coa.resourceSubcategory}</span><br/>
+                    {{/if}}
+                    {{if coaView.budgetRefEditable}}
+                    <label for="budgetRef" class="sameLine">Work order #/Budget ref</label><input type="text" name="budgetRef" value="${coa.budgetRef}"/>
+                    <lookups:lookup title="Work order #/Budget ref Lookup" group="workOrders" populate="budgetRef:code">(lookup)</lookups:lookup><br/>
+                    {{else}}
+                    <label for="budgetRef" class="sameLine">Work order #/Budget ref</label><span id="budgetRef">${coa.budgetRef}</span><br/>
+                    {{/if}}
+                    {{if coaView.admin}}
+                    <label for="adminOverridden" class="sameLine">Admin overridden</label><input type="checkbox" class="boxes" name="adminOverridden" value="true" {{if coa.adminOverridden}}checked="checked"{{/if}}/><br/>
+                    {{else}}
+                    <label for="adminOverridden" class="sameLine">Admin overridden</label><span id="adminOverridden">{{if coa.adminOverridden}}yes{{else}}no{{/if}}</span><br/>
+                    {{/if}}
+                    {{if coaView.facilities}}
+                    <label for="facilitiesApproved" class="sameLine">Facilities approved</label><input type="checkbox" class="boxes" name="facilitiesApproved" value="true" {{if coa.facilitiesApproved}}checked="checked"{{/if}}/><br/>
+                    {{else}}
+                    <label for="facilitiesApproved" class="sameLine">Facilities approved</label><span id="facilitiesApproved">{{if coa.facilitiesApproved}}yes{{else}}no{{/if}}</span><br/>
+                    {{/if}}
+                    <label for="note" class="diffLines">Note</label><textarea name="note">${coa.note}</textarea><br/>
+                    <button class="coaButton stateWidgetAction" type="button" action="back">Change SpeedType</button>
+                    <button class="coaButton stateWidgetAction" type="button" action="reset">Undo Changes</button>
+                </div>
+                <div class="coaHeader">
+                    <h3>Chart of Accounts ${coa.id}</h3>
+                </div>
+                <div class="coaFooter">
+                    <button class="coaButton stateWidgetAction" type="button" action="save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="view.html">
+        <div class="coa">
+            <form>
+                <div class="chartFields">
+                    {{if messages && messages.length > 0}}
+                    <ul class="messages">
+                        {{each messages}}
+                        <li>${$value}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                    {{if errors && errors.length > 0}}
+                    <ul class="errors">
+                        {{each errors}}
+                        <li>${$value}</li>
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                    <label for="speedtype" class="sameLine">SpeedType</label><span id="speedtype">${coa.speedtype}</span><br/>
+                    <label for="fund" class="sameLine">Fund</label><span id="fund">${coa.fund}</span><br/>
+                    <label for="program" class="sameLine">Program</label><span id="program">${coa.program}</span><br/>
+                    <label for="speedtypeDescr" class="sameLine">Speedtype descr</label><span id="speedtypeDescr">${coa.speedtypeDescr}</span><br/>
+                    <label for="account" class="sameLine">Account</label><span id="account">${coa.account}</span><br/>
+                    <label for="classField" class="sameLine">Class</label><span id="classField">${coa.classField}</span><br/>
+                    <label for="userField" class="sameLine">UserField</label><span id="userField">${coa.userField}</span><br/>
+                    <label for="projectId" class="sameLine">Project Id/grant</label><span id="projectId">${coa.projectId}</span><br/>
+                    <label for="source" class="sameLine">Source</label><span id="source">${coa.source}</span><br/>
+                    <label for="resourceType" class="sameLine">Resource type</label><span id="resourceType">${coa.resourceType}</span><br/>
+                    <label for="resourceCat" class="sameLine">Resource category</label><span id="resourceCat">${coa.resourceCat}</span><br/>
+                    <label for="resourceSubcat" class="sameLine">Resource subcategory</label><span id="resourceSubcat">${coa.resourceSubcat}</span><br/>
+                    <label for="budgetRef" class="sameLine">Work order #/Budget ref</label><span id="budgetRef">${coa.budgetRef}</span><br/>
+                    {{if coa.adminOverridden}}<label for="adminOverridden" class="sameLine">Admin overridden</label><span id="adminOverridden">${coa.adminOverridden}</span><br/>{{/if}}
+                    {{if coa.isFacilitiesSpeedtype}}<label for="facilitiesApproved" class="sameLine">Facilities approved</label><span id="facilitiesApproved">${coa.facilitiesApproved}</span><br/>{{/if}}
+                    {{if coa.note}}<label for="note" class="diffLines">Comments</label><p id="comments">${coa.note}</p>{{/if}}
+                </div>
+                <div class="coaHeader">
+                    <h3>Chart of Accounts ${coa.id}</h3>
+                </div>
+                {{if !coa.finalized && allowEdit && (!coa.adminOverridden || coa.isAdmin)}}
+                <div class="coaFooter">
+                    <button class="coaButton stateWidgetAction" type="button" action="edit">Edit</button>
+                </div>
+                {{/if}}
+            </form>
+        </div>
+    </div>
+    
+</div>
