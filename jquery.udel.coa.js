@@ -1,4 +1,5 @@
-    $.widget("udel.coa", $.udel.stateWidget, {
+$(function() {
+   $.widget("udel.coa", $.udel.stateWidget, {
         options: {
             name: "coa",
             templateBaseUrl: "https://somelocation/coa/templates/",
@@ -334,3 +335,4 @@
             });
         }
     });
+});
